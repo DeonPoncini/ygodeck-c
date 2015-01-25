@@ -50,7 +50,7 @@ target_link_libraries(ygodeck-c
 make_directory(${CMAKE_CURRENT_BINARY_DIR}/test)
 add_custom_command(TARGET ygodeck-c POST_BUILD
     COMMAND rm ARGS -f ${CMAKE_CURRENT_BINARY_DIR}/test/card.db
-    COMMAND ${CMAKE_CURRENT_LIST_DIR}/../ygodeck/scripts/load-db
+    COMMAND ${YGODECK_PATH}/load-db
     ARGS ${CMAKE_CURRENT_BINARY_DIR}/test/card.db
 )
 
