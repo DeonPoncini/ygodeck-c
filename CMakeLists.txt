@@ -52,6 +52,8 @@ add_custom_command(TARGET ygodeck-c POST_BUILD
     COMMAND rm ARGS -f ${CMAKE_CURRENT_BINARY_DIR}/test/card.db
     COMMAND ${YGODECK_PATH}/load-db
     ARGS ${CMAKE_CURRENT_BINARY_DIR}/test/card.db
+    ${MINDBW_PATH}/sqlite3-execute
+    ${YGODECK_DATA}
 )
 
 ################################
