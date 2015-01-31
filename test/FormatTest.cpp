@@ -32,6 +32,14 @@ BOOST_AUTO_TEST_CASE(Create)
         BOOST_CHECK_EQUAL(std::string(formatDateT), formatDates[i]);
         BOOST_CHECK(formatTA == ygo_data_Format_TRADITIONAL);
         FORMAT_NAME(delete_formatDate)(formatDateT);
+
+        auto formatM = FORMAT_NAME(new)(ygo_data_Format_MEGABANNED,
+                formatDates[i]);
+        auto formatDateM = FORMAT_NAME(formatDate)(formatM);
+        auto formatMA = FORMAT_NAME(format)(formatM);
+        BOOST_CHECK_EQUAL(std::string(formatDateM), formatDates[i]);
+        BOOST_CHECK(formatMA == ygo_data_Format_MEGABANNED);
+        FORMAT_NAME(delete_formatDate)(formatDateM);
     }
     FORMAT_NAME(delete_formatDates)(formatDates, count);
 }
@@ -46,21 +54,27 @@ BOOST_AUTO_TEST_CASE(Limits)
 {
     auto formatA = FORMAT_NAME(new)(ygo_data_Format_ADVANCED, "April 2004");
     auto formatT = FORMAT_NAME(new)(ygo_data_Format_TRADITIONAL, "April 2004");
+    auto formatM = FORMAT_NAME(new)(ygo_data_Format_MEGABANNED, "April 2004");
 
     BOOST_CHECK_EQUAL(0, FORMAT_NAME(cardCount)(formatA, "Change of Heart"));
     BOOST_CHECK_EQUAL(1, FORMAT_NAME(cardCount)(formatT, "Change of Heart"));
+    BOOST_CHECK_EQUAL(0, FORMAT_NAME(cardCount)(formatM, "Change of Heart"));
 
     BOOST_CHECK_EQUAL(1, FORMAT_NAME(cardCount)(formatA, "Mage Power"));
     BOOST_CHECK_EQUAL(1, FORMAT_NAME(cardCount)(formatT, "Mage Power"));
+    BOOST_CHECK_EQUAL(0, FORMAT_NAME(cardCount)(formatM, "Mage Power"));
 
     BOOST_CHECK_EQUAL(2, FORMAT_NAME(cardCount)(formatA, "Creature Swap"));
     BOOST_CHECK_EQUAL(2, FORMAT_NAME(cardCount)(formatT, "Creature Swap"));
+    BOOST_CHECK_EQUAL(0, FORMAT_NAME(cardCount)(formatM, "Creature Swap"));
 
     BOOST_CHECK_EQUAL(3, FORMAT_NAME(cardCount)(formatA, "Kuriboh"));
     BOOST_CHECK_EQUAL(3, FORMAT_NAME(cardCount)(formatT, "Kuriboh"));
+    BOOST_CHECK_EQUAL(3, FORMAT_NAME(cardCount)(formatM, "Kuriboh"));
 
     FORMAT_NAME(delete)(formatA);
     FORMAT_NAME(delete)(formatT);
+    FORMAT_NAME(delete)(formatM);
 
 }
 
