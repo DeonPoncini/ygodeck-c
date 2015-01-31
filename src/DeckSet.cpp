@@ -5,6 +5,7 @@
 #include <ygo/deck/Format.h>
 #include <ygo/data/cpp/DataTypes.h>
 #include <ygo/data/c/DataUtils.h>
+#include <ygo/data/Serialize.h>
 
 #include <zephyr/cstring.h>
 
@@ -139,6 +140,16 @@ int DECKSET_NAME(validate)(DECKSET_THIS p)
     auto v = CPP_CAST(p)->validate();
     if (v) return 1;
     return 0;
+}
+
+char* DECKSET_NAME(exportCards)(DECKSET_THIS p)
+{
+    return zephyr::cstring::make_copy(CPP_CAST(p)->exportCards());
+}
+
+void DECKSET_NAME(delete_exportCards)(char* cardMap)
+{
+    zephyr::cstring::delete_copy(cardMap);
 }
 
 }

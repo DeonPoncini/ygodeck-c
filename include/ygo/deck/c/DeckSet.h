@@ -44,6 +44,9 @@ void DECKSET_NAME(delete_cards)(ygo_deck_CardMap c);
 void DECKSET_NAME(remove)(DECKSET_THIS p);
 int DECKSET_NAME(validate)(DECKSET_THIS p);
 
+char* DECKSET_NAME(exportCards)(DECKSET_THIS p);
+void DECKSET_NAME(delete_exportCards)(char* cardMap);
+
 #ifdef __cplusplus
 }
 #endif
