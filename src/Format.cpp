@@ -50,39 +50,23 @@ int FORMAT_NAME(cardCount)(FORMAT_THIS p, const char* card)
 char** FORMAT_NAME(formatDates)(int* count)
 {
     auto dates = ygo::deck::Format::formatDates();
-    *count = dates.size();
-    char** ret = new char*[*count];
-    for (auto i = 0; i < *count; i++) {
-        ret[i] = zephyr::cstring::make_copy(dates[i]);
-    }
-    return ret;
+    return zephyr::cstring::make_copy(dates, count);
 }
 
 void FORMAT_NAME(delete_formatDates)(char** d, int count)
 {
-    for (auto i = 0; i < count; i++) {
-        zephyr::cstring::delete_copy(d[i]);
-    }
-    delete[] d;
+    zephyr::cstring::delete_copy(d, count);
 }
 
 char** FORMAT_NAME(formats)(int* count)
 {
     auto formats = ygo::deck::Format::formats();
-    *count = formats.size();
-    char** ret = new char*[*count];
-    for (auto i = 0; i < *count; i++) {
-        ret[i] = zephyr::cstring::make_copy(formats[i]);
-    }
-    return ret;
+    return zephyr::cstring::make_copy(formats, count);
 }
 
 void FORMAT_NAME(delete_formats)(char** d, int count)
 {
-    for (auto i = 0; i < count; i++) {
-        zephyr::cstring::delete_copy(d[i]);
-    }
-    delete[] d;
+    zephyr::cstring::delete_copy(d, count);
 }
 
 }

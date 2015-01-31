@@ -35,26 +35,13 @@ void CARD_SEL(query_delete)(ygo_data_StaticCardData* p)
 
 char** CARD_SEL(execute)(CARD_SEL_THIS p, int* items)
 {
-    // convert a vector of strings into an array of char* pointers
     auto list = CPP_CAST(p)->execute();
-    *items = list.size();
-    if (*items > 0) {
-        char** ret = new char*[*items];
-        for (auto i = 0; i < *items; i++) {
-            ret[i] = zephyr::cstring::make_copy(list[i]);
-        }
-        return ret;
-    } else {
-        return nullptr;
-    }
+    return zephyr::cstring::make_copy(list, items);
 }
 
 void CARD_SEL(execute_delete) (char** e, int items)
 {
-    for (auto i = 0; i < items; i++) {
-        zephyr::cstring::delete_copy(e[i]);
-    }
-    delete [] e;
+    zephyr::cstring::delete_copy(e, items);
 }
 
 CARD_SEL_THIS CARD_SEL(name)(CARD_SEL_THIS p, const char* like)
